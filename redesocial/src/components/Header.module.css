@@ -1,0 +1,9 @@
+.lista li {
+  list-style-type: none;
+}
+
+.lista li a {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
