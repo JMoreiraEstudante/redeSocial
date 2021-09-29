@@ -1,9 +1,48 @@
-.lista li {
-  list-style-type: none;
+.header {
+  background-color: rgb(92, 165, 233);
+  height: 100%;
+  position: fixed;
 }
 
-.lista li a {
-  color: blue;
-  text-decoration: underline;
+.header a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.lista {
+  padding: 0;
+  list-style: none;
+}
+
+.link {
   cursor: pointer;
+}
+
+@media screen and (min-width: 768px) {
+  .lista svg {
+    width: 2.7rem;
+    height: auto;
+    display: block;
+    margin: auto;
+  }
+
+  .lista li {
+    padding: 10px 20px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .lista svg {
+    width: 2.4rem;
+    height: auto;
+    display: block;
+    margin: auto;
+  }
+  .lista li {
+    padding: 5px 10px;
+  }
+}
+
+.lista svg {
+  color: white;
 }

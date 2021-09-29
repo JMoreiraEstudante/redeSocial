@@ -1,0 +1,61 @@
+@media screen and (max-width: 768px) {
+  .content {
+    font-size: small;
+  }
+  .footer svg {
+    width: 1.1rem;
+    height: auto;
+  }
+  footer p {
+    font-size: 1.1rem;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .post {
+    padding-left: 10px;
+  }
+  
+  .content {
+    font-size: medium;
+  }
+
+  .footer svg {
+    width: 1.4rem;
+    height: auto;
+  }
+
+  footer p {
+    font-size: 1.4rem;
+  }
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.footer svg {
+  padding: 0;
+  margin: 0;
+  color: rgb(92, 165, 233);
+}
+
+.footer p {
+  color: rgb(92, 165, 233);
+}
+
+.icons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.icon {
+  padding-right: 2rem;
+}
+
+.linha {
+    border-top: 1px solid rgb(92, 165, 233);
+}

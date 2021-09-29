@@ -2,20 +2,20 @@ import { Link } from "react-router-dom"
 import { useState } from "react";
 import axiosInstance from '../axios';
 import classes from './Header.module.css'
-
+import {RiHome7Fill, RiLoginCircleFill, RiLogoutCircleFill, RiAccountCircleFill} from "react-icons/ri"
 const Header = () => {
     const [loggedout] = useState(!isEmpty(window.localStorage.getItem('refresh_token')))
 
     function isEmpty(obj) {
-        for(var key in obj) {
-            if(obj.hasOwnProperty(key))
+        for (var key in obj) {
+            if (obj.hasOwnProperty(key))
                 return false;
         }
         return true;
     }
 
     function logout() {
-        const response = axiosInstance.post('user/logout/blacklist/', {
+        axiosInstance.post('user/logout/blacklist/', {
             refresh_token: localStorage.getItem('refresh_token'),
         });
         localStorage.removeItem('access_token');
@@ -25,23 +25,28 @@ const Header = () => {
     }
 
     return (
-        <div className={classes.header}>
+        <nav className={classes.header}>
             <ul className={classes.lista}>
                 <li>
                     <Link to='/'>
-                        <h3>Homepage</h3>
+                        <RiHome7Fill />
+                    </Link>
+                </li>
+                <li>
+                    <Link to='/perfil'>
+                        <RiAccountCircleFill/>
                     </Link>
                 </li>
                 {loggedout 
                 ? <li >
-                    <a onClick={logout}><h3>Logout</h3></a>
+                    <a className={classes.link} onClick={logout}><RiLogoutCircleFill/></a>
                 </li>
                 : <li >
-                    <Link to='/login'><h3>Login</h3></Link>
+                    <Link to='/login'><RiLoginCircleFill/></Link>
                 </li>
                 }
             </ul >
-        </div>
+        </nav>
     )
 }
 

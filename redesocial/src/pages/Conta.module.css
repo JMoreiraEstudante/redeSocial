@@ -1,0 +1,68 @@
+.image img {
+  max-width: 200px;
+  width: 50%;
+}
+
+.perfil {
+  max-width: 400px;
+}
+
+.upper {
+  padding-top: 4px;
+  display: flex;
+  flex-direction: row;
+}
+
+@media screen and (min-width: 768px) {
+  .follow, .unfollow {
+    display: flex;
+    padding: 10px 10px;
+    justify-content: space-between;
+  }
+
+  .follow input[type="submit"] {
+    background-color: rgb(92, 165, 233);
+    border: none;
+    border-radius: 20px;
+    padding: 2px 12px 5px 12px;
+    color: white;
+    font-weight: 600;
+  }
+
+  .unfollow input[type="submit"] {
+    background-color: #e96a5c;
+    border: none;
+    border-radius: 20px;
+    padding: 2px 12px 5px 12px;
+    color: white;
+    font-weight: 600;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .follow, .unfollow {
+    display: flex;
+    padding: 5px 5px;
+    justify-content: space-between;
+  }
+
+  .follow input[type="submit"] {
+    background-color: rgb(92, 165, 233);
+    border: none;
+    border-radius: 20px;
+    padding: 2px 12px 5px 12px;
+    color: white;
+    font-weight: 600;
+    font-size: small;
+  }
+
+  .unfollow input[type="submit"] {
+    background-color: #e96a5c;
+    border: none;
+    border-radius: 20px;
+    padding: 2px 12px 5px 12px;
+    color: white;
+    font-weight: 600;
+    font-size: small;
+  }
+}

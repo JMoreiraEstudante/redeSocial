@@ -1,0 +1,9 @@
+.contas {
+  margin: 0 auto;
+  max-width: 400px;
+}
+
+.contas input[type=text] {
+    margin: 10px 0px 20px 0px;
+    width: 100%;
+}

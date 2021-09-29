@@ -6,7 +6,7 @@ const UserContext = createContext({
 })
 
 export function UserContextProvider(props){
-    const [userSelected, setUserSelected] = useState([]);
+    const [userSelected, setUserSelected] = useState('');
 
     function userPick(id) {
         setUserSelected(id)
