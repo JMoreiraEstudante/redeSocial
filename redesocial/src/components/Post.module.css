@@ -34,12 +34,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-}
-
-.footer svg {
-  padding: 0;
-  margin: 0;
-  color: rgb(92, 165, 233);
+  padding-top: 10px;
 }
 
 .footer p {
@@ -52,8 +47,31 @@
   justify-content: space-around;
 }
 
-.icon {
-  padding-right: 2rem;
+.comentario, .like {
+  display: flex;
+  flex-direction: row;
+}
+
+.icon, .iconChecked{
+  padding-right: 2px;
+}
+
+.comentario, .like {
+  margin-right: 2rem;
+}
+
+.icon svg, .iconChecked svg {
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.icon svg {
+  color: rgb(92, 165, 233);
+}
+
+.iconChecked {
+  color: #e96a5c;
 }
 
 .linha {

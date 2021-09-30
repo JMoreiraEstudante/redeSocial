@@ -31,9 +31,7 @@ const Conta = () => {
 
     function onFollow() {
         follower.following.push(userCtx.user)
-        axiosInstance.put(`/user/${follower.id}/edit`, {
-            "photo": follower.photo,
-            "about": follower.about,
+        axiosInstance.post(`/user/followed/${follower.id}`, {
             "following": follower.following
         })
             .then((res) => {
@@ -48,9 +46,7 @@ const Conta = () => {
         follower.following = follower.following.filter((id) => {
             return id !== userCtx.user
         })
-        axiosInstance.put(`/user/${follower.id}/edit`, {
-            "photo": follower.photo,
-            "about": follower.about,
+        axiosInstance.post(`/user/followed/${follower.id}`, {
             "following": follower.following
         })
             .then((res) => {

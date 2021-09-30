@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import jwt_decode from "jwt-decode";
 import axiosInstance from '../axios';
 import classes from './HomePage.module.css';
-import User from '../components/User';
+import Users from '../components/Users';
 import Post from '../components/Post';
 
 const HomePage = () => {
@@ -29,12 +29,13 @@ const HomePage = () => {
             alert('Não é possível postar uma mensagem em branco.')
             return
         }
-        let formData = new FormData();
-        formData.append('author', jwt_decode(localStorage.getItem('refresh_token')).user_id);
-        formData.append('content', content);
-        axiosInstance.post('/', formData)
+        axiosInstance.post('/', {
+            "author": jwt_decode(localStorage.getItem('refresh_token')).user_id,
+            "content": content,
+            "likes": []
+        })
             .then((res) => {
-                setPosts([res.data, ...posts])
+                window.location.href = '/';
             })
         e.target.reset();
         setContent('')
@@ -77,11 +78,7 @@ const HomePage = () => {
                                         </form>
                                     </Col>
                                     <Col xs={12} className={classes.white}>
-                                        {users.slice(0, 4).map(user => {
-                                            return (
-                                                <User id={user.id} user_name={user.user_name} photo={user.photo} email={user.email} />
-                                            )
-                                        })}
+                                        <Users users={users.slice(0, 6)} />
                                         <Link to='/contas' style={{ textDecoration: 'none' }}>
                                             <p className={classes.veja}>Veja todos</p>
                                         </Link>
@@ -92,7 +89,7 @@ const HomePage = () => {
                         <Col xs={12} md={7}>
                             {posts.map(post => {
                                 return (follower.following !== undefined && users.length > 0 && (follower.id === post.author || follower.following.includes(post.author))
-                                    ? <Post id={post.id} content={post.content} author={users.find(user => user.id === post.author).user_name} user_id={post.author} />
+                                    ? <Post id={post.id} content={post.content} likes={post.likes} author={users.find(user => user.id === post.author).user_name} user_id={post.author} />
                                     : <></>
                                 )
                             })}
