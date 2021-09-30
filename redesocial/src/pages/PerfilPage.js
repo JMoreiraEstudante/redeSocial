@@ -9,6 +9,7 @@ import girlLogo from '../icons/3.png';
 import Modal from 'react-modal';
 import { TextareaAutosize } from '@mui/material';
 import { Link } from "react-router-dom"
+import Post from '../components/Post';
 
 const customStyles = {
     content: {
@@ -28,6 +29,7 @@ const Perfilpage = () => {
     const [user, setUser] = useState({})
     const [photo, setPhoto] = useState(defaultLogo)
     const [salve, setSalvo] = useState(false);
+    const [posts, setPosts] = useState([])
     //modal
     const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -61,6 +63,9 @@ const Perfilpage = () => {
                 if (res.data.photo === 2) setPhoto(boyLogo)
                 else if (res.data.photo === 3) setPhoto(girlLogo)
             })
+            axiosInstance.get(`/post/user/${id}`).then((res) => {
+                setPosts(res.data)
+            })
         }
     }, [])
 
@@ -79,9 +84,9 @@ const Perfilpage = () => {
         const id = jwt_decode(localStorage.getItem('refresh_token')).user_id;
 
         axiosInstance.put(`/user/${id}/edit`, {
-            "photo":checkPhoto(), 
-            "about":user.about, 
-            "following":user.following
+            "photo": checkPhoto(),
+            "about": user.about,
+            "following": user.following
         })
             .then((res) => {
                 console.log(res)
@@ -119,30 +124,41 @@ const Perfilpage = () => {
                         </Row>
 
                     </Modal>
-                    <div className={classes.image} onClick={openModal}>
-                        <img src={photo} alt=" perfil" />
-                        <div className={classes.middle}>
-                            <div className={classes.text}>Mudar?</div>
-                        </div>
-                    </div>
-                    <h1>@{user.user_name}</h1>
-                    <h2>Apresente-se:</h2>
-                    <div className={classes.white}>
-                        {user.about !== undefined && <form onSubmit={onSubmit}>
-                            <TextareaAutosize
-                                maxLength="255"
-                                minRows={2}
-                                defaultValue={user.about}
-                                className={classes.txtarea}
-                                onChange={(e) => setUser({ id: user.id, email: user.email, user_name: user.user_name, photo: user.photo, about: e.target.value })}
-                            />
-                            <div className={classes.botao}>
-                                <input type="submit" value="Salvar" />
-                                {user.about.length > 0 && <p>{user.about.length}</p>}
+                    <Row>
+                        <Col xs={12} md={5}>
+                            <div className={classes.image} onClick={openModal}>
+                                <img src={photo} alt=" perfil" />
+                                <div className={classes.middle}>
+                                    <div className={classes.text}>Mudar?</div>
+                                </div>
                             </div>
-                        </form>}
-                    </div>
-                    {salve && <p className={classes.salvamento}>Suas informações foram salvas!</p>}
+                            <h1>@{user.user_name}</h1>
+                            <h2>Apresente-se:</h2>
+                            <div className={classes.white}>
+                                {user.about !== undefined && <form onSubmit={onSubmit}>
+                                    <TextareaAutosize
+                                        maxLength="255"
+                                        minRows={2}
+                                        defaultValue={user.about}
+                                        className={classes.txtarea}
+                                        onChange={(e) => setUser({ id: user.id, email: user.email, user_name: user.user_name, photo: user.photo, about: e.target.value })}
+                                    />
+                                    <div className={classes.botao}>
+                                        <input type="submit" value="Salvar" />
+                                        {user.about.length > 0 && <p>{user.about.length}</p>}
+                                    </div>
+                                </form>}
+                            </div>
+                            {salve && <p className={classes.salvamento}>Suas informações foram salvas!</p>}
+                        </Col>
+                        <Col xs={12} md={7}>
+                            {posts.map(post => {
+                                return (
+                                    <Post id={post.id} content={post.content} likes={post.likes} author={user.user_name} user_id={post.author} />
+                                )
+                            })}
+                        </Col>
+                    </Row>
                 </div>
                 : <h1>Realize o <Link to='/login'>Login</Link> para vizualizar seu perfil</h1>
             }

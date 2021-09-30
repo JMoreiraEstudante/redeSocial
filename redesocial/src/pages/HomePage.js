@@ -89,8 +89,7 @@ const HomePage = () => {
                         <Col xs={12} md={7}>
                             {posts.map(post => {
                                 return (follower.following !== undefined && users.length > 0 && (follower.id === post.author || follower.following.includes(post.author))
-                                    ? <Post id={post.id} content={post.content} likes={post.likes} author={users.find(user => user.id === post.author).user_name} user_id={post.author} />
-                                    : <></>
+                                    && <Post id={post.id} content={post.content} likes={post.likes} author={users.find(user => user.id === post.author).user_name} user_id={post.author} />
                                 )
                             })}
                         </Col>

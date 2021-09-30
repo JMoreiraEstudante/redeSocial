@@ -1,39 +1,29 @@
 import classes from './Post.module.css';
 import { useState, useEffect, useContext } from 'react';
 import { BsHeartFill, BsHeart } from "react-icons/bs"
-import { FaCommentAlt } from "react-icons/fa"
 import { Link } from "react-router-dom"
 import UserContext from '../store/user-context'
-import CommentContext from '../store/comment-context'
 import axiosInstance from '../axios';
 import jwt_decode from "jwt-decode";
 
-const Post = ({ id, content, author, user_id, likes }) => {
-    const [comments, setComments] = useState([])
+const Comment = ({ id, content, author, user_id, likes }) => {
     const [heart, setHeart] = useState(BsHeart)
     const [liked, setLiked] = useState(false)
     const [likesLength, setlikesLength] = useState(likes.length)
     const [hover, setHover] = useState(false)
     const userCtx = useContext(UserContext)
-    const commentCtx = useContext(CommentContext)
 
     function toggleUserSelected() {
         userCtx.userPick(user_id)
     }
 
-    function toggleCommentSelected() {
-        commentCtx.commentPick(id)
-    }
-
     useEffect(() => {
-        if (likes.includes(jwt_decode(localStorage.getItem('refresh_token')).user_id)) {
+        const id = jwt_decode(localStorage.getItem('refresh_token')).user_id
+        if (likes.includes(id)) {
             setHeart(BsHeartFill)
             setLiked(true)
             setHover(true)
         }
-        axiosInstance.get(`comment/${id}`).then((res) => {
-            setComments(res.data)
-        })
     }, [])
 
     function hoverOn() {
@@ -50,8 +40,8 @@ const Post = ({ id, content, author, user_id, likes }) => {
             setLiked(true)
             setHeart(BsHeartFill)
             likes.push(id_token)
-            setlikesLength(likesLength + 1)
-            axiosInstance.post(`/liked/${id}`, {
+            setlikesLength(likesLength+1)
+            axiosInstance.post(`/commentLiked/${id}`, {
                 "likes": likes,
             })
                 .then((res) => {
@@ -66,8 +56,8 @@ const Post = ({ id, content, author, user_id, likes }) => {
             likes = likes.filter((liker) => {
                 return id_token !== liker
             })
-            setlikesLength(likesLength - 1)
-            axiosInstance.post(`/liked/${id}`, {
+            setlikesLength(likesLength-1)
+            axiosInstance.post(`/commentLiked/${id}`, {
                 "likes": likes,
             })
                 .then((res) => {
@@ -89,12 +79,6 @@ const Post = ({ id, content, author, user_id, likes }) => {
                     </Link>
                 </div>
                 <div className={classes.icons}>
-                    <div className={classes.comentario}>
-                        <div onClick={toggleCommentSelected}>
-                            <div className={classes.icon}><Link to='/post'><FaCommentAlt /></Link></div>
-                        </div>
-                        <p>{comments.length}</p>
-                    </div>
                     <div className={classes.like}>
                         <div className={hover ? classes.iconChecked : classes.icon} onMouseEnter={hoverOn}
                             onMouseLeave={hoverOff} onClick={loveIt}>{heart}</div>
@@ -106,4 +90,4 @@ const Post = ({ id, content, author, user_id, likes }) => {
     )
 }
 
-export default Post
+export default Comment

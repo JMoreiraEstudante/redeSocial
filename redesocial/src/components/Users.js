@@ -11,7 +11,6 @@ const Users = ({ users }) => {
         const id = jwt_decode(localStorage.getItem('refresh_token')).user_id
         axiosInstance.get(`/user/${id}`).then((res) => {
             setFollower(res.data)
-            console.log("EFFECT!")
         })
     }, [clicked])
 

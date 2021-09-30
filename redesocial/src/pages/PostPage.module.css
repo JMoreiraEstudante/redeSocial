@@ -1,7 +1,3 @@
-.page {
-  padding-top: 10px;
-}
-
 .txtarea {
   width: 100%;
   border: none;
@@ -31,25 +27,16 @@
   color: white;
 }
 
-.veja {
-  padding-right: 0.4em;
-  text-align: right;
-  max-width: 400px;
-}
-
 .white {
   margin-top: 15px;
   padding: 5px;
   background-color: white;
 }
 
-@media screen and (max-width: 768px) {
-  .white {
-    margin-top: 10px;
-  }
-  .veja {
-    font-size: small;
-  }
+.title {
+  font-weight: 600;
+  color: rgb(92, 165, 233);
+  padding-top: 10px;
 }
 
 @media screen and (min-width: 768px) {

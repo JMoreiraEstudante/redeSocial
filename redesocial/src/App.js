@@ -7,14 +7,16 @@ import Header from "./components/Header";
 import Layout from "./components/Layout";
 import Contas from "./pages/Contas";
 import Conta from "./pages/Conta";
+import PostPage from "./pages/PostPage";
 import { UserContextProvider } from "./store/user-context";
+import { CommentContextProvider } from "./store/comment-context";
 
 function App() {
   return (
     <Layout>
       <Row>
         <Col xs={2} sm={1}><Header /></Col>
-        <UserContextProvider>
+        <UserContextProvider><CommentContextProvider>
         <Switch>
           <Col xs={10} sm={11}>
             <Container>
@@ -33,10 +35,13 @@ function App() {
               <Route exact path="/conta">
                 <Conta />
               </Route>
+              <Route exact path="/post">
+                <PostPage />
+              </Route>
             </Container>
           </Col>
         </Switch>
-        </UserContextProvider>
+        </CommentContextProvider></UserContextProvider>
       </Row>
     </Layout>
   );
