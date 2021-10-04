@@ -29,6 +29,18 @@
   .lista li {
     padding: 10px 20px;
   }
+
+  .notification .badge {
+    position: absolute;
+    top: 30px;
+    right: -50px;
+    padding: 2px 9px;
+    border-radius: 50%;
+    background: #e96a5c;
+    color: white;
+    font-size:medium;
+    font-weight: 600;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -41,8 +53,23 @@
   .lista li {
     padding: 5px 10px;
   }
+  .notification .badge {
+    position: absolute;
+    top: 30px;
+    right: -45px;
+    padding: 2px 8px;
+    border-radius: 50%;
+    background: #e96a5c;
+    color: white;
+    font-size: small;
+    font-weight: 600;
+  }
 }
 
 .lista svg {
   color: white;
+}
+
+.notification {
+  position: relative;
 }

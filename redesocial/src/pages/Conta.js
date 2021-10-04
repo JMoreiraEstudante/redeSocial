@@ -18,6 +18,7 @@ const Conta = () => {
     const userCtx = useContext(UserContext)
     const history = useHistory();
     const [posts, setPosts] = useState([])
+    const [loveIt, setLoveIt] = useState(false)
 
     useEffect(() => {
         const id = jwt_decode(localStorage.getItem('refresh_token')).user_id
@@ -34,7 +35,7 @@ const Conta = () => {
         axiosInstance.get(`/post/user/${userCtx.user}`).then((res) => {
             setPosts(res.data)
         })
-    }, [clicked])
+    }, [clicked, loveIt])
 
     function onFollow() {
         follower.following.push(userCtx.user)
@@ -64,6 +65,19 @@ const Conta = () => {
             })
     }
 
+    function postLoveIt(id, user_id, action) {
+        axiosInstance.post(`/liked/${id}`, {
+            "like": user_id,
+            "action": action
+        })
+            .then((res) => {
+                console.log(res)
+                setLoveIt(!loveIt)
+            }).catch((erro) => {
+                console.log("erro", erro)
+            })
+    }
+
     return (
         <div>
             <Row>
@@ -88,7 +102,7 @@ const Conta = () => {
                 <Col xs={12} md={7}>
                     {posts.map(post => {
                         return (
-                            <Post id={post.id} content={post.content} likes={post.likes} author={user.user_name} user_id={post.author} />
+                            <Post id={post.id} content={post.content} likes={post.likes} author={user.user_name} user_id={post.author} love={postLoveIt} liked={post.likes.includes(jwt_decode(localStorage.getItem('refresh_token')).user_id)} comments={post.comments} />
                         )
                     })}
                 </Col>

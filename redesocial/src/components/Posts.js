@@ -15,9 +15,10 @@ const Posts = ({ users, click }) => {
         })
     }, [click, loveIt])
 
-    function postLoveIt(id, likes) {
+    function postLoveIt(id, user_id, action) {
         axiosInstance.post(`/liked/${id}`, {
-            "likes": likes,
+            "like": user_id,
+            "action": action
         })
             .then((res) => {
                 console.log(res)

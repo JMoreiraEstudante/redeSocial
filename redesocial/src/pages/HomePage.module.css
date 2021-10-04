@@ -56,5 +56,6 @@
   .locked {
     position: fixed;
     width: 30%;
+    min-width: 334px;
   }
 }

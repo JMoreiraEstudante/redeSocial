@@ -3,6 +3,8 @@ import { useState } from "react";
 import axiosInstance from '../axios';
 import classes from './Header.module.css'
 import {RiHome7Fill, RiLoginCircleFill, RiLogoutCircleFill, RiAccountCircleFill} from "react-icons/ri"
+import {IoMdNotifications} from "react-icons/io"
+
 const Header = () => {
     const [loggedout] = useState(!isEmpty(window.localStorage.getItem('refresh_token')))
 
@@ -35,6 +37,12 @@ const Header = () => {
                 <li>
                     <Link to='/perfil'>
                         <RiAccountCircleFill/>
+                    </Link>
+                </li>
+                <li>
+                    <Link to='#' className={classes.notification}>
+                        <IoMdNotifications/>
+                        <p  className={classes.badge}>3</p>
                     </Link>
                 </li>
                 {loggedout 

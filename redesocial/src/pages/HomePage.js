@@ -52,7 +52,7 @@ const HomePage = () => {
             {loggedout
                 ? <div>
                     <Row className={classes.page} >
-                        <Col xs={12} md={5}>
+                        <Col sm={12} md={5}>
                             <Row >
                                 <div className={classes.locked}>
                                     <Col xs={12} className={classes.white}>
@@ -79,7 +79,7 @@ const HomePage = () => {
                                 </div>
                             </Row>
                         </Col>
-                        <Col xs={12} md={7}>
+                        <Col sm={12} md={5}>
                             {users.length > 0 && <Posts users={users} click={clicked}/>}
                         </Col>
                     </Row >

@@ -48,9 +48,10 @@ const PostPage = () => {
         setContent('')
     };
 
-    function postLoveIt(id, likes) {
+    function postLoveIt(id, user_id, action) {
         axiosInstance.post(`/liked/${id}`, {
-            "likes": likes,
+            "like": user_id,
+            "action": action
         })
             .then((res) => {
                 console.log(res)
@@ -89,7 +90,7 @@ const PostPage = () => {
             </Col>
             <Col xs={12} md={7}>
                 <h2 className={classes.title}>Comentários:</h2>
-                 {users.length > 0 && <Comments users={users} click={clicked}/>}
+                {users.length > 0 && <Comments users={users} click={clicked} />}
             </Col>
         </Row>
     )

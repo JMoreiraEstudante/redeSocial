@@ -24,14 +24,14 @@ const Post = ({ id, content, author, user_id, likes, love, liked, comments }) =>
         if (!liked) {
             liked = true
             likes.push(id_token)
-            love(id, likes)
+            love(id, id_token, liked)
         }
         else {
             liked = false
             likes = likes.filter((liker) => {
                 return id_token !== liker
             })
-            love(id, likes)
+            love(id, id_token, liked)
         }
     }
 

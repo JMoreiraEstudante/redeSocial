@@ -30,6 +30,7 @@ const Perfilpage = () => {
     const [photo, setPhoto] = useState(defaultLogo)
     const [salve, setSalvo] = useState(false);
     const [posts, setPosts] = useState([])
+    const [loveIt, setLoveIt] = useState(false)
     //modal
     const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -67,7 +68,7 @@ const Perfilpage = () => {
                 setPosts(res.data)
             })
         }
-    }, [])
+    }, [loveIt])
 
     function checkPhoto() {
         if (photo === defaultLogo) return 1
@@ -98,6 +99,19 @@ const Perfilpage = () => {
                 console.log("erro", erro)
             })
     };
+
+    function postLoveIt(id, user_id, action) {
+        axiosInstance.post(`/liked/${id}`, {
+            "like": user_id,
+            "action": action
+        })
+            .then((res) => {
+                console.log(res)
+                setLoveIt(!loveIt)
+            }).catch((erro) => {
+                console.log("erro", erro)
+            })
+    }
 
     return (
         <>
@@ -152,9 +166,9 @@ const Perfilpage = () => {
                             {salve && <p className={classes.salvamento}>Suas informações foram salvas!</p>}
                         </Col>
                         <Col xs={12} md={7}>
-                            {posts.map(post => {
+                            { posts.map(post => {
                                 return (
-                                    <Post id={post.id} content={post.content} likes={post.likes} author={user.user_name} user_id={post.author} />
+                                    <Post id={post.id} content={post.content} likes={post.likes} author={user.user_name} user_id={post.author} love={postLoveIt} liked={post.likes.includes(jwt_decode(localStorage.getItem('refresh_token')).user_id)} comments={post.comments} />
                                 )
                             })}
                         </Col>
