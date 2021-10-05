@@ -1,0 +1,63 @@
+.notification {
+  margin: 15px auto 0 auto;
+  padding: 5px 10px;
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  max-width: 500px;
+}
+
+.bottom {
+  padding-left: 10px;
+}
+
+@media screen and (min-width: 768px) {
+  .image img {
+    width: 90px;
+  }
+  .alive input[type="submit"],
+  .dead input[type="submit"] {
+    border: none;
+    border-radius: 20px;
+    padding: 4px 16px 7px 16px;
+    color: white;
+    font-weight: 600;
+    font-size: larger;
+    float: right;
+    clear: both;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .image img {
+    width: 60px;
+  }
+  .notification h3 {
+    font-size: medium;
+  }
+  .alive input[type="submit"],
+  .dead input[type="submit"] {
+    border: none;
+    border-radius: 20px;
+    padding: 2px 8px 4px 8px;
+    color: white;
+    font-weight: 600;
+    font-size: small;
+    float: right;
+    clear: both;
+  }
+}
+
+.alive,
+.dead {
+  overflow: hidden;
+}
+
+.alive input[type="submit"] {
+  background-color: rgb(92, 165, 233);
+}
+
+.dead input[type="submit"] {
+  background-color: rgb(202, 220, 237);
+  cursor: not-allowed;
+}

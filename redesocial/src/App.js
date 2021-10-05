@@ -8,6 +8,7 @@ import Layout from "./components/Layout";
 import Contas from "./pages/Contas";
 import Conta from "./pages/Conta";
 import PostPage from "./pages/PostPage";
+import NotificationPage from "./pages/NotificationPage";
 import { UserContextProvider } from "./store/user-context";
 import { CommentContextProvider } from "./store/comment-context";
 
@@ -37,6 +38,9 @@ function App() {
               </Route>
               <Route exact path="/post">
                 <PostPage />
+              </Route>
+              <Route exact path="/notification">
+                <NotificationPage />
               </Route>
             </Container>
           </Col>
