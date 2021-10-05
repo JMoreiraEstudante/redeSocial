@@ -9,10 +9,12 @@ const Posts = ({ users, click }) => {
 
     useEffect(() => {
         const id = jwt_decode(localStorage.getItem('refresh_token')).user_id
-        axiosInstance.get(`/following/${id}`).then((res) => {
-            setPosts(res.data)
-            console.log(res.data)
-        })
+        setInterval(() => {
+            axiosInstance.get(`/following/${id}`).then((res) => {
+                setPosts(res.data)
+                console.log(res.data)
+            })
+        }, 2500)
     }, [click, loveIt])
 
     function postLoveIt(id, user_id, action) {

@@ -10,11 +10,12 @@ const Comments = ({ users, click }) => {
     const commentCtx = useContext(CommentContext)
 
     useEffect(() => {
-        const id = jwt_decode(localStorage.getItem('refresh_token')).user_id
-        axiosInstance.get(`/comment/${commentCtx.comment}`).then((res) => {
-            setComments(res.data)
-            console.log(res.data)
-        })
+        setInterval(() => {
+            axiosInstance.get(`/comment/${commentCtx.comment}`).then((res) => {
+                setComments(res.data)
+                console.log(res.data)
+            })
+        }, 2500)
     }, [click, loveIt])
 
     function commentLoveIt(id, user_id, action) {
@@ -34,7 +35,7 @@ const Comments = ({ users, click }) => {
         <>
             {comments.map(post => {
                 return (
-                    <Comment id={post.id} content={post.content} likes={post.likes} author={users.find(user => user.id === post.author).user_name} user_id={post.author} love={commentLoveIt} liked={post.likes.includes(jwt_decode(localStorage.getItem('refresh_token')).user_id)}/>
+                    <Comment id={post.id} content={post.content} likes={post.likes} author={users.find(user => user.id === post.author).user_name} user_id={post.author} love={commentLoveIt} liked={post.likes.includes(jwt_decode(localStorage.getItem('refresh_token')).user_id)} />
                 )
             })}
         </>

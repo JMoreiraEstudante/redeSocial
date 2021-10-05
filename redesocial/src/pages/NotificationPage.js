@@ -30,11 +30,17 @@ const NotificationPage = () => {
     }
 
     useEffect(() => {
-        const id = jwt_decode(localStorage.getItem('refresh_token')).user_id
-        axiosInstance.get(`/notificationall/${id}`).then((res) => {
-            setNotifications(res.data)
-            console.log(res.data)
-        })
+        try {
+            const id = jwt_decode(localStorage.getItem('refresh_token')).user_id
+            axiosInstance.get(`/notificationall/${id}`).then((res) => {
+                setNotifications(res.data)
+                console.log(res.data)
+            })
+        }
+        catch (e) {
+            //não fez login ainda
+            console.log(e)
+        }
     }, [clicked])
 
     return (
@@ -46,7 +52,7 @@ const NotificationPage = () => {
                             {notifications.map(notification => {
                                 return (
                                     <Col xs={12}>
-                                        <Notification id={notification.id} alive={notification.alive} message={notification.message} sender={notification.sender} ack={acknowledge}/>
+                                        <Notification id={notification.id} alive={notification.alive} message={notification.message} sender={notification.sender} ack={acknowledge} />
                                     </Col>
                                 )
                             })}
