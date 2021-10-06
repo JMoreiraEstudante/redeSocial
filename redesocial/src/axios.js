@@ -82,9 +82,7 @@ axiosInstance.interceptors.response.use(
 				window.location.href = '/login/';
 			}
 		}
-
-		// specific error handling done elsewhere
-		window.location.href = '/login/';
+		//login com informações erradas
 		return Promise.reject(error);
 	}
 );

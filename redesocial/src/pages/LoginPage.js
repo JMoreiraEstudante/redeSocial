@@ -26,7 +26,6 @@ const LoginPage = () => {
     const loginSubmit = (e) => {
         e.preventDefault();
         console.log(formData);
-
         axiosInstance
             .post(`token/`, {
                 email: formData.email,
@@ -37,7 +36,6 @@ const LoginPage = () => {
                 localStorage.setItem('refresh_token', res.data.refresh);
                 axiosInstance.defaults.headers['Authorization'] =
                     'JWT ' + localStorage.getItem('access_token');
-                //history.push("/");
                 window.location.href = '/';
             }).catch((erro) => {
                 console.log(erro)

@@ -18,6 +18,10 @@
   cursor: pointer;
 }
 
+.icon {
+  position: relative;
+}
+
 @media screen and (min-width: 768px) {
   .lista svg {
     width: 2.7rem;
@@ -32,13 +36,16 @@
 
   .notification .badge {
     position: absolute;
-    top: -12px;
-    right: -47px;
+    top: 13px;
+    right: 0;
+    z-index: 1;
     padding: 2px 9px;
+    text-align: center;
+    width: 25px;
     border-radius: 50%;
     background: #e96a5c;
     color: white;
-    font-size:medium;
+    font-size: medium;
     font-weight: 600;
   }
 }
@@ -55,8 +62,9 @@
   }
   .notification .badge {
     position: absolute;
-    top: -9px;
-    right: -45px;
+    top: 13px;
+    right: 0;
+    z-index: 1;
     padding: 2px 8px;
     border-radius: 50%;
     background: #e96a5c;

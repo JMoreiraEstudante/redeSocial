@@ -22,9 +22,13 @@ const Header = () => {
         axiosInstance.post('user/logout/blacklist/', {
             refresh_token: localStorage.getItem('refresh_token'),
         });
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('refresh_token');
-        axiosInstance.defaults.headers['Authorization'] = null;
+        try {
+            localStorage.removeItem('access_token');
+            localStorage.removeItem('refresh_token');
+            axiosInstance.defaults.headers['Authorization'] = null;
+        } catch (e) {
+            console.log("erro", e)
+        }
         window.location.href = '/login/';
     }
 
@@ -58,8 +62,10 @@ const Header = () => {
                 </li>
                 <li>
                     <Link to='/notification' className={classes.notification}>
-                        <IoMdNotifications />
-                        {notifications.length > 0 && <p className={classes.badge}>{notifications.length}</p>}
+                        <div className={classes.icon}>
+                            <IoMdNotifications />
+                            {notifications.length > 0 && <p className={classes.badge}>{notifications.length}</p>}
+                        </div>
                     </Link>
                 </li>
                 {loggedout
